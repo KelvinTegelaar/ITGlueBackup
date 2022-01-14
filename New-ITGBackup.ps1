@@ -73,6 +73,7 @@ do {
     Write-Host "Retrieved $($orgs.count) Organisations" -ForegroundColor Yellow
 }while ($orgs.count % 1000 -eq 0 -and $orgs.count -ne 0)
 #Grabbing all passwords.
+$i = 0
 Write-Host "Getting passwords" -ForegroundColor Green
 do {
     $i++
@@ -94,9 +95,6 @@ foreach ($org in $orgs) {
         $Passwords.attributes | where-object {$_.'organization-name' -eq $($org.attributes.name) } |select-object 'organization-name', name, username, password, url, created-at, updated-at | convertto-html -head $head -precontent '<h1>Password export</h1><input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for content.." title="Type a query">' | out-file "$($ExportDir)\$($org.attributes.name)\passwords.html"
     }
 }
-
-$i = 0
-
 
 Write-Host "Getting Flexible Assets" -ForegroundColor Green
 $FlexAssetTypes = (Get-ITGlueFlexibleAssetTypes -page_size 1000).data
