@@ -132,6 +132,6 @@ foreach ($FlexibleAsset in $FlexibleAssets.attributes) {
     $outputfilename = $outputfilename.Split([IO.Path]::GetInvalidFileNameChars()) -join '_'
 
     write-host "Ouputting $outputpath\$outputfilename" -ForegroundColor Yellow
-    $HTMLTables | out-file "$outputpath\$($outputfilename).html" -Force
-    $FlexibleAsset.traits | export-csv -path "$outputpath\$($outputfilename).csv" -Force -NoTypeInformation
+    $HTMLTables | out-file -LiteralPath "$outputpath\$($outputfilename).html" -Force
+    $FlexibleAsset.traits | export-csv -LiteralPath "$outputpath\$($outputfilename).csv" -Force -NoTypeInformation
 }
